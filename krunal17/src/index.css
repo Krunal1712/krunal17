@@ -64,6 +64,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Animated noise/grain overlay */
@@ -91,6 +93,9 @@ body::after {
   pointer-events: none;
   z-index: 0;
   animation: ambientShift 20s ease-in-out infinite alternate;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @keyframes ambientShift {

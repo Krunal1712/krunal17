@@ -9,10 +9,13 @@
   height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
   background-size: 200% 100%;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   z-index: 10000;
   animation: gradientSlide 3s ease infinite;
   box-shadow: 0 0 12px var(--glow-primary);
+  will-change: transform;
 }
 
 @keyframes gradientSlide {
@@ -35,12 +38,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(20px, 4vw, 60px);
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(10, 10, 15, 0.5);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
   z-index: 1000;
-  transition: all 0.4s var(--ease-out-expo);
+  transition: background 0.4s var(--ease-out-expo), border-color 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.navbar.scrolled {
+  background: rgba(10, 10, 15, 0.85);
+  border-bottom-color: rgba(255,255,255,0.08);
+  padding: 0 clamp(20px, 4vw, 60px);
 }
 
 .logo {
@@ -125,6 +136,8 @@
 
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -31,9 +31,11 @@ function App() {
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
       const scrolled = (window.scrollY / height) * 100;
-      scrollBar.style.width = scrolled + "%";
+      if (scrollBar) {
+        scrollBar.style.transform = `scaleX(${scrolled / 100})`;
+      }
 
-      setNavScrolled(window.scrollY > 50);
+      setNavScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -107,15 +109,7 @@ function App() {
 
       {/* NAVBAR */}
       <nav
-        className="navbar"
-        style={{
-          borderBottomColor: navScrolled
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0.03)",
-          background: navScrolled
-            ? "rgba(10, 10, 15, 0.85)"
-            : "rgba(10, 10, 15, 0.5)",
-        }}
+        className={`navbar ${navScrolled ? "scrolled" : ""}`}
       >
         <div className="logo">Krunal.dev</div>
 
