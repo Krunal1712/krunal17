@@ -1,8 +1,8 @@
 import "./App.css";
-import { ReactTyped } from "react-typed";
+
 import emailjs from "@emailjs/browser";
 import { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import profile from "./assets/P1.jpg";
 import { FaGraduationCap } from "react-icons/fa";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
@@ -22,6 +22,20 @@ import { HiArrowUpRight } from "react-icons/hi2";
 
 function App() {
   const [navScrolled, setNavScrolled] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+
+  const words = [
+    "Full Stack Development.",
+    "Mobile App Development.",
+    "UI/UX Design.",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const scrollBar = document.querySelector(".scroll-bar");
@@ -183,17 +197,19 @@ function App() {
 
             <h1>
               I build{" "}
-              <span>
-                <ReactTyped
-                  strings={[
-                    "Full Stack Development.",
-                    "Mobile App Development.",
-                    "UI/UX Design.",
-                  ]}
-                  typeSpeed={60}
-                  backSpeed={40}
-                  loop
-                />
+              <span className="animated-word-container">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={words[wordIndex]}
+                    className="animated-word"
+                    initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -15, filter: "blur(8px)" }}
+                    transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                  >
+                    {words[wordIndex]}
+                  </motion.span>
+                </AnimatePresence>
               </span>
             </h1>
 

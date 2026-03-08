@@ -222,28 +222,63 @@
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-.hero h1 span {
-  background: linear-gradient(135deg, var(--primary-light), var(--accent-light), var(--primary));
-  background-size: 200% 200%;
+.animated-word-container {
+  display: flex;
+  position: relative;
+  height: 1.25em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.animated-word {
+  position: relative;
+  white-space: nowrap;
+  background: linear-gradient(
+    to right,
+    var(--primary-light) 0%,
+    var(--accent-light) 25%,
+    #fff 50%,
+    var(--accent-light) 75%,
+    var(--primary-light) 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: textGradient 5s ease infinite;
-  border-right: none;
-  padding-right: 0;
+  animation: shine 4s linear infinite;
+  font-weight: 800;
+  display: block;
 }
 
-@keyframes textGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+@media (max-width: 768px) {
+  .animated-word-container {
+    min-width: unset;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+  }
+  
+  .animated-word {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
 }
 
 .hero p {
