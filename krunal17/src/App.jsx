@@ -27,7 +27,6 @@ function App() {
   const words = [
     "Full Stack Development.",
     "Mobile App Development.",
-    "UI/UX Design.",
   ];
 
   useEffect(() => {
