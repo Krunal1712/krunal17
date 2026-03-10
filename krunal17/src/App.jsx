@@ -305,13 +305,6 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                GitHub <HiArrowUpRight />
-              </a>
-              <a
-                href="https://krunal1712.github.io/krunalproject/"
-                target="_blank"
-                rel="noreferrer"
-              >
                 Live Demo <HiArrowUpRight />
               </a>
             </div>
