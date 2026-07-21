@@ -3,7 +3,7 @@ import "./App.css";
 import emailjs from "@emailjs/browser";
 import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import profile from "./assets/P1.jpg";
+import profile from "./assets/krunal.jpg";
 import { FaGraduationCap } from "react-icons/fa";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -23,6 +23,8 @@ import { HiArrowUpRight } from "react-icons/hi2";
 function App() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
+  const [toasts, setToasts] = useState([]);
+  const [expandedEdu, setExpandedEdu] = useState({});
 
   const words = [
     "Full Stack Development.",
@@ -55,24 +57,49 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const addToast = (message, type = "success") => {
+    const id = Date.now();
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      removeToast(id);
+    }, 4000);
+  };
+
+  const removeToast = (id) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
+  const toggleEdu = (index) => {
+    setExpandedEdu((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
+    // Replace the placeholders below with your actual EmailJS credentials
+    const SERVICE_ID = "YOUR_SERVICE_ID";
+    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
     emailjs
       .sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        SERVICE_ID,
+        TEMPLATE_ID,
         form.current,
-        "YOUR_PUBLIC_KEY"
+        PUBLIC_KEY
       )
       .then(() => {
-        alert("Message sent successfully!");
+        addToast("Message sent successfully!", "success");
         form.current.reset();
       })
-      .catch(() => {
-        alert("Failed to send message.");
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        addToast("Failed to send message.", "error");
       });
   };
 
@@ -253,42 +280,6 @@ function App() {
             whileHover={{ y: -8 }}
           >
             <div className="project-number">01</div>
-            <h3>Smart Traffic System</h3>
-            <p>
-              IoT-based traffic optimization system using Python, OpenCV and
-              real-time image processing for intelligent traffic management.
-            </p>
-            <div className="project-tech">
-              <span>Python</span>
-              <span>OpenCV</span>
-              <span>IoT</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="project-card"
-            variants={cardVariant}
-            whileHover={{ y: -8 }}
-          >
-            <div className="project-number">02</div>
-            <h3>Online Library Platform</h3>
-            <p>
-              Full-stack web application with authentication, Node.js backend,
-              and scalable architecture for managing digital books.
-            </p>
-            <div className="project-tech">
-              <span>Node.js</span>
-              <span>Express</span>
-              <span>MongoDB</span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="project-card"
-            variants={cardVariant}
-            whileHover={{ y: -8 }}
-          >
-            <div className="project-number">03</div>
             <h3>Appointment Booking System</h3>
             <p>
               Full stack web application that allows users to book appointments
@@ -326,8 +317,7 @@ function App() {
             <div className="section-label">About</div>
             <h2>Turning ideas into digital reality</h2>
             <p>
-              I recently completed a full stack Development course and I am
-              currently in my third year of BSC CA & IT at{" "}
+              I am currently in my 4th year of BSc (CA & IT) at{" "}
               <span>Sardar Patel University</span>.
             </p>
             <p>
@@ -368,26 +358,115 @@ function App() {
           <h2>Academic Journey</h2>
         </motion.div>
 
-        <div className="education-grid">
-          <motion.div className="education-card" variants={cardVariant}>
-            <h3>Bachelor of Science (CA & IT)</h3>
-            <p className="edu-college">Sardar Patel University</p>
-            <p className="edu-year">2023 — Present</p>
-            <p>
-              Studying Computer Applications and Information Technology,
-              focusing on programming, databases, and software development.
-            </p>
-          </motion.div>
+        <div className="timeline-container">
+          <div className="timeline-line"></div>
+          <div className="timeline-items">
+            {/* Timeline Item 1 */}
+            <motion.div 
+              className="timeline-item left" 
+              variants={cardVariant}
+            >
+              <div className="timeline-dot">
+                <FaGraduationCap />
+              </div>
+              <div className="timeline-content education-card">
+                <h3>Bachelor of Science (CA & IT)</h3>
+                <p className="edu-college">Sardar Patel University</p>
+                <p className="edu-year">4th Year — 2026 — Present</p>
+                <p>
+                  Studying Computer Applications and Information Technology (4th Year),
+                  focusing on programming, databases, and advanced software development.
+                </p>
+                
+                <button 
+                  type="button"
+                  className={`edu-toggle-btn ${expandedEdu[0] ? "active" : ""}`}
+                  onClick={() => toggleEdu(0)}
+                >
+                  {expandedEdu[0] ? "Hide Details" : "Show Details"}
+                </button>
+                
+                <AnimatePresence initial={false}>
+                  {expandedEdu[0] && (
+                    <motion.div 
+                      className="edu-details"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="edu-details-inner">
+                        <h4>Key Focus Areas & Subjects:</h4>
+                        <ul>
+                          <li>Database Management Systems (DBMS) & SQL</li>
+                          <li>Object-Oriented Programming (Java, C++)</li>
+                          <li>Web Technologies & Scripting (HTML5, CSS3, JavaScript)</li>
+                          <li>System Analysis & Software Engineering</li>
+                        </ul>
+                        <div className="edu-highlights">
+                          <span className="highlight-tag">BSc CA & IT Graduate</span>
+                          <span className="highlight-tag">Grade: 8.5+ CGPA Equivalent</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
 
-          <motion.div className="education-card" variants={cardVariant}>
-            <h3>Full Stack Development</h3>
-            <p className="edu-college">Self Learning & Internship</p>
-            <p className="edu-year">Internship</p>
-            <p>
-              Mastering modern web development technologies including React,
-              Node.js, Express, and MongoDB through hands-on projects.
-            </p>
-          </motion.div>
+            {/* Timeline Item 2 */}
+            <motion.div 
+              className="timeline-item right" 
+              variants={cardVariant}
+            >
+              <div className="timeline-dot">
+                <FaCode />
+              </div>
+              <div className="timeline-content education-card">
+                <h3>Full Stack Development</h3>
+                <p className="edu-college">Self Learning & Internship</p>
+                <p className="edu-year">Internship Completed</p>
+                <p>
+                  Mastered modern web development technologies including React,
+                  Node.js, Express, and MongoDB through hands-on projects.
+                </p>
+                
+                <button 
+                  type="button"
+                  className={`edu-toggle-btn ${expandedEdu[1] ? "active" : ""}`}
+                  onClick={() => toggleEdu(1)}
+                >
+                  {expandedEdu[1] ? "Hide Details" : "Show Details"}
+                </button>
+                
+                <AnimatePresence initial={false}>
+                  {expandedEdu[1] && (
+                    <motion.div 
+                      className="edu-details"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <div className="edu-details-inner">
+                        <h4>Key Focus Areas & Practical Training:</h4>
+                        <ul>
+                          <li>MERN Stack Applications (MongoDB, Express, React, Node.js)</li>
+                          <li>Asynchronous JavaScript, RESTful APIs & Fetch Integration</li>
+                          <li>State Management, Component Lifecycle & Styling Systems</li>
+                          <li>Version Control (Git/GitHub) and Cloud Deployment</li>
+                        </ul>
+                        <div className="edu-highlights">
+                          <span className="highlight-tag">10+ Personal Projects Built</span>
+                          <span className="highlight-tag">Full API Development</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 
@@ -568,6 +647,47 @@ function App() {
           </a>
         </div>
       </footer>
+
+      {/* TOAST CONTAINER */}
+      <div className="toast-container">
+        <AnimatePresence>
+          {toasts.map((toast) => (
+            <motion.div
+              key={toast.id}
+              className={`toast ${toast.type}`}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <div className="toast-content">
+                {toast.type === "success" ? (
+                  <svg className="toast-icon success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                ) : (
+                  <svg className="toast-icon error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                )}
+                <span className="toast-message">{toast.message}</span>
+              </div>
+              <button type="button" className="toast-close" onClick={() => removeToast(toast.id)}>
+                &times;
+              </button>
+              <div className="toast-progress-bar">
+                <motion.div
+                  className="toast-progress-inner"
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 4, ease: "linear" }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
