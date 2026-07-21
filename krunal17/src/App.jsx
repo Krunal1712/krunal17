@@ -274,6 +274,7 @@ function App() {
         </motion.div>
 
         <div className="project-grid">
+          {/* Project 1 */}
           <motion.div
             className="project-card"
             variants={cardVariant}
@@ -293,6 +294,61 @@ function App() {
             <div className="project-buttons">
               <a
                 href="https://krunal1712.github.io/krunalproject/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live Demo <HiArrowUpRight />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Project 2 */}
+          <motion.div
+            className="project-card"
+            variants={cardVariant}
+            whileHover={{ y: -8 }}
+          >
+            <div className="project-number">02</div>
+            <h3>Kalptaj Portal</h3>
+            <p>
+              A responsive frontend web application developed for business operations,
+              featuring interactive dashboards, sleek navigation, and modular components for data management.
+            </p>
+            <div className="project-tech">
+              <span>React</span>
+              <span>Tailwind CSS</span>
+              <span>JavaScript</span>
+            </div>
+            <div className="project-buttons">
+              <a
+                href="https://kalptej-one.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Live Demo <HiArrowUpRight />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Project 3 */}
+          <motion.div
+            className="project-card"
+            variants={cardVariant}
+            whileHover={{ y: -8 }}
+          >
+            <div className="project-number">03</div>
+            <h3>Spell Corrector</h3>
+            <p>
+              A client-side web application that takes user text input and highlights/corrects spelling mistakes in real-time.
+            </p>
+            <div className="project-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+            </div>
+            <div className="project-buttons">
+              <a
+                href="https://krunal1712.github.io/spell_corrector/"
                 target="_blank"
                 rel="noreferrer"
               >
