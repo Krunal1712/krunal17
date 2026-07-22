@@ -5,7 +5,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import profile from "./assets/krunal.jpg";
 import { FaGraduationCap } from "react-icons/fa";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaSun, FaMoon } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import {
   FaCode, FaServer, FaDatabase, FaTools, FaLaptopCode,
@@ -19,12 +19,21 @@ import {
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { HiArrowUpRight } from "react-icons/hi2";
+import CountUp from "react-countup";
 
 function App() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [toasts, setToasts] = useState([]);
   const [expandedEdu, setExpandedEdu] = useState({});
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "dark";
+  });
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const words = [
     "Full Stack Development.",
@@ -190,6 +199,14 @@ function App() {
           <a href="mailto:krunal17122005@gmail.com" aria-label="Email">
             <MdEmail />
           </a>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+            aria-label="Toggle Theme"
+          >
+            {theme === "dark" ? <FaSun /> : <FaMoon />}
+          </button>
         </div>
       </nav>
 
@@ -254,6 +271,49 @@ function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* STATS SECTION */}
+      <motion.section
+        className="stats-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+      >
+        <div className="stats-grid">
+          {/* Stat Item 1 */}
+          <motion.div className="stat-card" variants={scaleUp}>
+            <div className="stat-number">
+              <CountUp end={10} duration={2.5} enableScrollSpy scrollSpyOnce />+
+            </div>
+            <div className="stat-label">Projects Completed</div>
+          </motion.div>
+
+          {/* Stat Item 2 */}
+          <motion.div className="stat-card" variants={scaleUp}>
+            <div className="stat-number">
+              <CountUp end={15} duration={2.5} enableScrollSpy scrollSpyOnce />+
+            </div>
+            <div className="stat-label">Tech Stack Tools</div>
+          </motion.div>
+
+          {/* Stat Item 3 */}
+          <motion.div className="stat-card" variants={scaleUp}>
+            <div className="stat-number">
+              4th Year
+            </div>
+            <div className="stat-label">BSc CA & IT Student</div>
+          </motion.div>
+
+          {/* Stat Item 4 */}
+          <motion.div className="stat-card" variants={scaleUp}>
+            <div className="stat-number">
+              <CountUp end={7.61} decimals={2} duration={2.5} enableScrollSpy scrollSpyOnce />
+            </div>
+            <div className="stat-label">Academic CGPA</div>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* PROJECTS */}
       <motion.section
@@ -418,8 +478,8 @@ function App() {
           <div className="timeline-line"></div>
           <div className="timeline-items">
             {/* Timeline Item 1 */}
-            <motion.div 
-              className="timeline-item left" 
+            <motion.div
+              className="timeline-item left"
               variants={cardVariant}
             >
               <div className="timeline-dot">
@@ -433,18 +493,18 @@ function App() {
                   Studying Computer Applications and Information Technology (4th Year),
                   focusing on programming, databases, and advanced software development.
                 </p>
-                
-                <button 
+
+                <button
                   type="button"
                   className={`edu-toggle-btn ${expandedEdu[0] ? "active" : ""}`}
                   onClick={() => toggleEdu(0)}
                 >
                   {expandedEdu[0] ? "Hide Details" : "Show Details"}
                 </button>
-                
+
                 <AnimatePresence initial={false}>
                   {expandedEdu[0] && (
-                    <motion.div 
+                    <motion.div
                       className="edu-details"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -457,11 +517,10 @@ function App() {
                           <li>Database Management Systems (DBMS) & SQL</li>
                           <li>Object-Oriented Programming (Java, C++)</li>
                           <li>Web Technologies & Scripting (HTML5, CSS3, JavaScript)</li>
-                          <li>System Analysis & Software Engineering</li>
                         </ul>
                         <div className="edu-highlights">
                           <span className="highlight-tag">BSc CA & IT Graduate</span>
-                          <span className="highlight-tag">Grade: 8.5+ CGPA Equivalent</span>
+                          <span className="highlight-tag">Grade: 7.61 CGPA</span>
                         </div>
                       </div>
                     </motion.div>
@@ -471,8 +530,8 @@ function App() {
             </motion.div>
 
             {/* Timeline Item 2 */}
-            <motion.div 
-              className="timeline-item right" 
+            <motion.div
+              className="timeline-item right"
               variants={cardVariant}
             >
               <div className="timeline-dot">
@@ -486,18 +545,18 @@ function App() {
                   Mastered modern web development technologies including React,
                   Node.js, Express, and MongoDB through hands-on projects.
                 </p>
-                
-                <button 
+
+                <button
                   type="button"
                   className={`edu-toggle-btn ${expandedEdu[1] ? "active" : ""}`}
                   onClick={() => toggleEdu(1)}
                 >
                   {expandedEdu[1] ? "Hide Details" : "Show Details"}
                 </button>
-                
+
                 <AnimatePresence initial={false}>
                   {expandedEdu[1] && (
-                    <motion.div 
+                    <motion.div
                       className="edu-details"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
