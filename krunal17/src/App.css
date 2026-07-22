@@ -1625,3 +1625,300 @@ h2 {
     width: calc(100% - 40px);
   }
 }
+
+/* ================================================ */
+/*  RESUME MODAL                                    */
+/* ================================================ */
+
+.resume-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.resume-modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme='light'] .resume-modal {
+  background: var(--bg-primary);
+  box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.15);
+}
+
+.resume-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  border-bottom: 1px solid var(--border);
+}
+
+.resume-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.resume-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.resume-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-spring);
+  border: 1px solid var(--border);
+}
+
+.resume-action-btn.btn-close {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+}
+
+.resume-action-btn.btn-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.resume-action-btn.btn-print {
+  background: var(--primary);
+  color: var(--bg-primary);
+  border-color: var(--primary-dark);
+}
+
+.resume-action-btn.btn-print:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+}
+
+.resume-modal-body {
+  padding: 40px;
+  overflow-y: auto;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* Resume Paper Sheet Layout */
+.resume-sheet {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.resume-header {
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.resume-title-block h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.03em;
+}
+
+.resume-title-block p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #06b6d4;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.resume-contact-block {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.resume-contact-block a {
+  color: inherit;
+  font-weight: 500;
+}
+
+.resume-contact-block a:hover {
+  color: #06b6d4;
+}
+
+.resume-section {
+  margin-bottom: 25px;
+}
+
+.resume-section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+
+.resume-summary {
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.resume-grid-2col {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+.resume-item {
+  margin-bottom: 16px;
+}
+
+.resume-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.resume-item-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.resume-item-org {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.resume-item-date {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748b;
+  font-family: monospace;
+}
+
+.resume-item-desc {
+  font-size: 0.85rem;
+  color: #475569;
+  margin: 4px 0 0 0;
+  line-height: 1.5;
+}
+
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-skill-tag {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* Print overrides */
+@media print {
+  #home, #projects, #about, #education, #skills, #contact, footer, nav, .scroll-bar, .toast-container, .hero::before, .hero::after {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .main > *:not(.resume-modal-overlay) {
+    display: none !important;
+  }
+  
+  .resume-modal-overlay {
+    position: absolute !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    z-index: auto !important;
+  }
+  
+  .resume-modal {
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+  
+  .resume-modal-header {
+    display: none !important;
+  }
+  
+  .resume-modal-body {
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+  }
+  
+  .resume-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+}

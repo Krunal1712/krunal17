@@ -266,7 +266,9 @@ function App() {
               <a href="#projects">
                 <button className="primary">View Work</button>
               </a>
-              <button className="secondary">Download Resume</button>
+              <a href="/Krunal_Resume.pdf" target="_blank" rel="noreferrer">
+                <button className="secondary">Download Resume</button>
+              </a>
             </div>
           </motion.div>
         </div>
